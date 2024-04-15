@@ -1,0 +1,1 @@
+export const API_URL_POINT = "http://localhost:5000"
