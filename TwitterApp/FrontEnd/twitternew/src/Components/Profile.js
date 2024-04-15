@@ -67,7 +67,7 @@ const Profile = () => {
             <img className='ava' src={require("../Img/Bokeh-twitter-header-banner.jpg")} alt='Banner' />
             <div className="position-absolute ms-2 img" >
                 {!user?.picture ? (<Avatar className='ava1' src={require("../Img/profile.jpg")} size="90" round={true} />)
-                    : (<Avatar className='ava1' src={`http://localhost:5000/uploads/${user?.picture}`} size="90" round={true} />)
+                    : (<Avatar className='ava1' src={`https://twittercloneapp2.onrender.com/uploads/${user?.picture}`} size="90" round={true} />)
                 }
             </div>
             <div className=' float-end d-flex'>
