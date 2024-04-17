@@ -10,12 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { clearErrors, createTweets, getTweets } from '../actions/tweet.action';
 import { toast } from 'react-toastify';
 import './feed.css'
+import { getuser } from '../actions/user.action';
+import Loader from './Loader';
 
 const Feed = () => {
   // Using useSelector to access the state of Reducers
   const { tweets } = useSelector((state) => state.tweetView)
   const { success, error, refresh } = useSelector((state) => state.tweetCreate)
-  const { user } = useSelector((state) => state.user);
+  const {loading, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //  State for modal and image uploader and content
@@ -62,11 +64,14 @@ const Feed = () => {
       dispatch(getTweets())
     }
   }, [dispatch, refresh])
+  // useEffect(()=>{dispatch(getuser())},[dispatch])
   useEffect(() => {
     dispatch(getTweets())
   }, [dispatch])
   return (
-    <div className='main w-[50%] border border-gray-200'>
+    <>
+    {loading?(<Loader/>):(
+      <div className='main w-[50%] border border-gray-200'>
       <div className="flex items-center justify-between border-b border-gray-200">
         <div className="curor-pointer">
           <h1 className="font-bold text-lg px-2 py-2">Home</h1>
@@ -102,6 +107,8 @@ const Feed = () => {
       </div>
       {tweets && tweets?.map((tweet) => <TweetPage key={tweet?._id} tweet={tweet} />)}
     </div>
+    )}
+    </>
   )
 }
 

@@ -87,7 +87,7 @@ function TweetPage({ tweet }) {
             <div className='d-flex p-2'>
 
               {!tweet?.userDetails[0]?.picture ? (<Avatar className='ava' src={require("../Img/profile.jpg")} size="40" round={true} />)
-                : (<Avatar className='ava' src={`https://twittercloneapp2.onrender.com/uploads/${tweet?.userDetails[0]?.picture}`} size="40" round={true} />)
+                : (<Avatar className='ava' src={`${API_URL_POINT}uploads/${tweet?.userDetails[0]?.picture}`} size="40" round={true} />)
               }
               <div className=' ms-1 w-100'>
                 <div className="d-flex align-items-center mt-3">
@@ -96,7 +96,7 @@ function TweetPage({ tweet }) {
                 <Link className=' text-decoration-none text-black' to={`/tweetview/${tweet?._id}`}>
                   <div>
                     <p className=' ms-2'>{tweet?.content}</p>
-                    {tweet?.image && <img src={`https://twittercloneapp2.onrender.com/uploads/${tweet?.image}`} alt={tweet?._id} />}
+                    {tweet?.image && <img src={`${API_URL_POINT}uploads/${tweet?.image}`} alt={tweet?._id} />}
                   </div>
                 </Link>
                 <div className='d-flex justify-content-between'>

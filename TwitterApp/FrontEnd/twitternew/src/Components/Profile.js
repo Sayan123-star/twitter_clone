@@ -9,9 +9,11 @@ import TweetPage from './demo'
 import { clearErrors, getuser, updateImage, updateProfile } from '../actions/user.action'
 import { toast } from 'react-toastify';
 import { UPDATE_USER_RESET } from '../consants/user.consants'
+import { API_URL_POINT } from '../config'
+import Loader from './Loader'
 
 const Profile = () => {
-    const { user, islogged } = useSelector((state) => state.user)
+    const { loading, user, islogged } = useSelector((state) => state.user)
     const { tweets } = useSelector((state) => state.tweetView)
     const { isUpdated, error } = useSelector((state) => state.profileUpdate)
     const [edit, setEdit] = useState(false);
@@ -60,14 +62,15 @@ const Profile = () => {
         dispatch(userTweets())
     }, [dispatch])
     return (
-        <div className='main  w-[50%]  border border-gray-200'>
+        <>
+        {loading?(<Loader/>):(<div className='main  w-[50%]  border border-gray-200'>
             <div className="curor-pointer">
                 <h1 className="font-bold text-lg px-2 py-2">Profile</h1>
             </div>
             <img className='ava' src={require("../Img/Bokeh-twitter-header-banner.jpg")} alt='Banner' />
             <div className="position-absolute ms-2 img" >
                 {!user?.picture ? (<Avatar className='ava1' src={require("../Img/profile.jpg")} size="90" round={true} />)
-                    : (<Avatar className='ava1' src={`https://twittercloneapp2.onrender.com/uploads/${user?.picture}`} size="90" round={true} />)
+                    : (<Avatar className='ava1' src={`${API_URL_POINT}uploads/${user?.picture}`} size="90" round={true} />)
                 }
             </div>
             <div className=' float-end d-flex'>
@@ -143,7 +146,8 @@ const Profile = () => {
                     <p>{String(user?.dob).substr(0, 10)}</p></>) : ""}
             </div>
             {tweets && tweets?.map((tweet) => tweet?.tweetby.includes(user?._id)?<TweetPage key={tweet?._id} tweet={tweet} />:"")}
-        </div>
+        </div>)}
+        </>
     )
 }
 

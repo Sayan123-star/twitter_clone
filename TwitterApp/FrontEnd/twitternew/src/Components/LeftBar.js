@@ -18,7 +18,8 @@ const LeftBar = () => {
     toast.success('Log out successfully')
   }
   return (
-    <div className='w-[20%]'>
+    <>
+    {islogged?(<div className='w-[20%]'>
       <div>
         <div >
             {/* Left side bar */}
@@ -40,7 +41,31 @@ const LeftBar = () => {
             </div>
         </div>
       </div>
-    </div>
+    </div>):(<div className=' d-none'>
+      <div>
+        <div >
+            {/* Left side bar */}
+            <img width={50} src={require("../Img/twitter-logo.avif")} alt="Twitter Logo" />
+        </div>
+        <div>
+            {/* Home ,profile and logout buttons */}
+            <div className='flex items-center my-1 px-1  hover:bg-gray-200 hover:cursor-pointer rounded-full'>
+                <div><FontAwesomeIcon icon={faHome} /></div>
+                <Link className=' text-black text-decoration-none' to="/"><p className='font-bold mt-3 ml-2'>Home</p></Link>
+            </div>
+            <div className='flex items-center my-1 px-1 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
+                <div><FontAwesomeIcon icon={faUser} /></div>
+                <Link className=' text-black text-decoration-none' to="/profile"><p className='font-bold mt-3 ml-2'>Profile</p></Link>
+            </div>
+            <div onClick={logoutHandle} className='flex items-center my-1 px-1 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
+                <div><FontAwesomeIcon icon={faSignOut} /></div>
+                <p className=' text-black font-bold mt-3 ml-2'>Logout</p>
+            </div>
+        </div>
+      </div>
+    </div>)}
+    </>
+    
   )
 }
 

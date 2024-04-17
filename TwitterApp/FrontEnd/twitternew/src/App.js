@@ -22,15 +22,17 @@ function App() {
   // the useEffect will get the user and tweets even after reloding
   useEffect(()=>{
     dispatch(getuser())
+ },[dispatch])
+  useEffect(()=>{
     dispatch(getTweets())
   },[dispatch])
-  
+ 
   return (
     <div className="App">
       <BrowserRouter>
       {/* creating all the routes  for different pages */}
       <div className='main flex justify-between w-[80%] mx-auto'>
-      {islogged===true?(<LeftBar/>):("")}
+      <LeftBar/>
       <Routes>
         <Route path="/login" Component={Login}/>
       </Routes>
@@ -46,7 +48,7 @@ function App() {
       <Route path="/profile/:id" Component={OtherProfile}/>
       <Route path="/tweetview/:id" Component={TweetView}/>
       </Routes>
-      {islogged===true?(<RightBar/>):("")}
+      <RightBar/>
     </div>
     </BrowserRouter>
     {/* toast view */}

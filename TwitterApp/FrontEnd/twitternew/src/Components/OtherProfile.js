@@ -9,9 +9,11 @@ import { otherTweets } from '../actions/tweet.action'
 import TweetPage from './demo'
 import { toast } from 'react-toastify';
 import { FOLLOW_USER_RESET, UNFOLLOW_USER_RESET } from '../consants/user.consants'
+import { API_URL_POINT } from '../config'
+import Loader from './Loader'
 
 const OtherProfile = () => {
-  const { user, islogged } = useSelector((state) => state.user)
+  const { loading,user, islogged } = useSelector((state) => state.user)
   const { tweets } = useSelector((state) => state.tweetView)
   const dispatch = useDispatch()
   const params = useParams();
@@ -46,14 +48,16 @@ const OtherProfile = () => {
   }, [dispatch, isUnfollow])
 
   return (
-    <div className='main w-[50%]  border border-gray-200'>
+    <>
+    {loading?(<Loader/>):(
+      <div className='main w-[50%]  border border-gray-200'>
       <div className="curor-pointer">
         <h1 className="font-bold text-lg px-2 py-2">Profile</h1>
       </div>
       <img className='ava' src={require("../Img/Bokeh-twitter-header-banner.jpg")} alt='Banner' />
       <div className="position-absolute ms-2 img" >
         {!userdetail?.picture ? (<Avatar className='ava' src={require("../Img/profile.jpg")} size="90" round={true} />)
-          : (<Avatar className='ava' src={`https://twittercloneapp2.onrender.com/uploads/${userdetail?.picture}`} size="90" round={true} />)
+          : (<Avatar className='ava' src={`${API_URL_POINT}uploads/${userdetail?.picture}`} size="90" round={true} />)
         }
       </div>
       <div className=' float-end d-flex'>
@@ -74,7 +78,8 @@ const OtherProfile = () => {
       {tweets && tweets?.map((tweet) => tweet?.tweetby.includes(params.id) ?
         <TweetPage key={tweet?._id} tweet={tweet} /> : "")}
     </div>
-
+    )}
+    </>
   )
 }
 
