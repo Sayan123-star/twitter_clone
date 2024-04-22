@@ -27,7 +27,7 @@ const Login = () => {
         }
         else if(islogged===true){ 
             toast.success("User Logged in Successfully")
-            window.location.pathname="/profile"
+            window.location.pathname="/"
         }
     },[error,dispatch,islogged,navigate])
     return (
