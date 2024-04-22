@@ -63,11 +63,11 @@ export const UserRedeucer = ((state={user:{}},action)=>{
 })
 
 
-export const otherUsersReducer=((state = {othUser:[]},action)=>{
+export const otherUsersReducer=((state = {othUsers:[]},action)=>{
     switch (action.type) {
 
         case ALL_USER_REQUEST:
-            return{
+            return{ 
                 ...state,
                 loading: true,
             }
@@ -75,7 +75,7 @@ export const otherUsersReducer=((state = {othUser:[]},action)=>{
             return{
                 ...state,
                 loading: false,
-                othUser: action.payload
+                othUsers: action.payload
             }
         case ALL_USER_FAIL:
             return{

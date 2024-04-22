@@ -45,7 +45,7 @@ export const getuser = ()=> async(dispatch)=>{
 
 export const getOtherUsers = ()=> async(dispatch)=>{
     try {
-        const CONFIG_OB = {
+        const CONFIG_OB = { 
             headers: { "Content-Type": "application/json",  Authorization : `Bearer ${localStorage.getItem('token')}` }
           }
           dispatch({type:ALL_USER_REQUEST});

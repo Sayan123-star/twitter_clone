@@ -11,7 +11,7 @@ import "./logSign.css"
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {loading,error,islogged} = useSelector(state=>state.user)
+    const {loading,error,islogged} = useSelector((state)=>state.user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     // Submit the form to login. 
@@ -25,9 +25,9 @@ const Login = () => {
             toast.error(error);
             dispatch(clearErrors())
         }
-        else if(islogged===true){
+        else if(islogged===true){ 
             toast.success("User Logged in Successfully")
-            navigate("/profile")
+            window.location.pathname="/profile"
         }
     },[error,dispatch,islogged,navigate])
     return (

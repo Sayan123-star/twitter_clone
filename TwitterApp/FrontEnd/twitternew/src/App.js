@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getuser } from './actions/user.action.js';
+import { getOtherUsers, getuser } from './actions/user.action.js';
 import OtherProfile from "./Components/OtherProfile.js"
 import { getTweets } from './actions/tweet.action.js';
 
@@ -21,12 +21,14 @@ function App() {
   const dispatch=useDispatch(); 
   // the useEffect will get the user and tweets even after reloding
   useEffect(()=>{
+    dispatch(getOtherUsers())
+  },[dispatch])
+  useEffect(()=>{
     dispatch(getuser())
  },[dispatch])
   useEffect(()=>{
     dispatch(getTweets())
   },[dispatch])
- 
   return (
     <div className="App">
       <BrowserRouter>

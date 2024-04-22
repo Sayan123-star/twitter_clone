@@ -7,7 +7,7 @@ import { LOGOUT_SUCCESS } from '../consants/user.consants'
 import { toast } from 'react-toastify'
 const LeftBar = () => {
   const dispatch = useDispatch()
-  const {islogged}=useSelector(state=>state.user)
+  const {islogged}=useSelector((state)=>state.user)
   const navigate = useNavigate();
   // controlling the log out funtionality
   const logoutHandle=()=>{
