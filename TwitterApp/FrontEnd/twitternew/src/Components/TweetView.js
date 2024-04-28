@@ -78,7 +78,7 @@ const TweetView = () => {
           <div className='d-flex p-2'>
 {/* Image display of the tweeted user */}
             {!tweetOne?.tweetby?.picture ? (<Avatar className='ava' src={require("../Img/profile.jpg")} size="40" round={true} />)
-              : (<Avatar className='ava' src={`http://localhost:5000/uploads/${tweetOne?.tweetby?.picture}`} size="40" round={true} />)
+              : (<Avatar className='ava' src={`${tweetOne?.tweetby?.picture}`} size="40" round={true} />)
             }
             <div className=' ms-1 w-100'>
               <div className="d-flex align-items-center mt-3">
@@ -87,7 +87,7 @@ const TweetView = () => {
 
               <div>
                 <p className=' ms-2'>{tweetOne?.content}</p>
-                {tweetOne?.image && <img src={`http://localhost:5000/uploads/${tweetOne?.image}`} style={{ width: "400px", height: "400px" }} alt={tweetOne?._id} />}
+                {tweetOne?.image && <img src={`${tweetOne?.image}`} style={{ width: "400px", height: "400px" }} alt={tweetOne?._id} />}
               </div>
               <div className='d-flex justify-content-between'>
                 <div className=' d-flex' >
