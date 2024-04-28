@@ -96,7 +96,7 @@ function TweetPage({ tweet }) {
                 <Link className=' text-decoration-none text-black' to={`/tweetview/${tweet?._id}`}>
                   <div>
                     <p className=' ms-2'>{tweet?.content}</p>
-                    {tweet?.image && <img src={`${API_URL_POINT}/uploads/${tweet?.image}`} alt={tweet?._id} />}
+                    {tweet?.image && <img src={`${tweet?.image}`} alt={tweet?._id} />}
                   </div>
                 </Link>
                 <div className='d-flex justify-content-between'>

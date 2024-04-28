@@ -3,6 +3,7 @@ const userModel = require("../Model/user.model");
 const bcrypt = require("bcrypt") 
 const jwt = require("jsonwebtoken")
 const dotenv = require("dotenv")
+const cloudinary = require("cloudinary").v2
 dotenv.config()
 // User Register
 const userRegister = async(req,res)=>{
@@ -131,9 +132,18 @@ const updateUser = async(req,res)=>{
 // Updating user by uploading image
 const userImage = async(req,res)=>{
     const picture = req.file.path;
-    const path = picture.split('\\')[1];
-    const user = await userModel.findByIdAndUpdate(req.user._id,{picture:path})
-    
-    res.status(200).json({message:"Image Uploaded successfully",success:true})
+    // const path = picture.split('\\')[1];
+    cloudinary.uploader.upload(picture, async (error,result)=>
+     {
+        if(error){
+            console.log(error);
+            return res.status(500).json({message:"Internal error occured"})
+        }
+        imageUrl=result.secure_url
+        // console.log(req.user._id);
+        await userModel.findByIdAndUpdate(req.user._id,{picture:imageUrl},{new:true})
+        res.status(200).json({message:"Image Uploaded successfully",success:true,imageUrl})
+     });
+    // const user = await userModel.findByIdAndUpdate(req.user._id,{picture:path})
 }
 module.exports = {userRegister,userLogin,getProfile,otherProfile,followUser,unfollowUser,oneProfile,updateUser,userImage}

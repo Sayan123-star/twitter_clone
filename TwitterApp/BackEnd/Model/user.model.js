@@ -19,16 +19,13 @@ const UserModel = mongoose.Schema({
         required:true
     },
     picture:{
-        type:String,
-        required:false
+        type:String
     },
     location:{
-        type:String,
-        required:false
+        type:String
     },
     dob:{
-        type:Date,
-        required:false
+        type:Date
     },
     followers:[{
         type:mongoose.Schema.ObjectId,

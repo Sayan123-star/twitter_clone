@@ -30,7 +30,7 @@ const RightBar = () => {
             
               <div>
               {!item?.picture?(<Avatar className='ava' src={require("../Img/profile.jpg")} size="40"  round={true} />)
-                :(<Avatar className='ava' src={`http://localhost:5000/uploads/${item?.picture}`} size="40"  round={true} />)
+                :(<Avatar className='ava' src={`${item?.picture}`} size="40"  round={true} />)
                 }
               </div>
               <div className="ml-2">

@@ -1,23 +1,49 @@
 const tweetModel = require("../Model/Tweet.model");
 const userModel = require("../Model/user.model");
+const cloudinary = require("cloudinary").v2
+
 // Tweet creation
 const createTweet = async(req,res)=>{
     const {content}=req.body
     req.body.tweetby=req.user._id;
     let image=req.file
     // if req.file is undefined no image
-    req.file!==undefined? image = req.file.path:image=''
-    const path = image.split('\\')[1];
-    if(!content){
-        return res.status(401).json({error:"Please fill the necessary fields",success:false})
+    req.file!==undefined? image = req.file.path:image=""
+    // const path = picture.split('\\')[1];
+    if(image!=""){
+        cloudinary.uploader.upload(image, async (error,result)=>
+     {
+        if(error){
+            console.log(error);
+            return res.status(500).json({message:"Internal error occured"})
+        }
+        imageUrl=result.secure_url
+        console.log(content);
+        if(!content){
+            return res.status(401).json({error:"Please fill the necessary fields",success:false})
+        }
+        const user = await userModel.findById(req.user._id).select("-password")
+        const tweet = await tweetModel.create({content,tweetby:req.user._id,userDetails:user,image:imageUrl})
+        try {
+            res.status(201).json({message:"Tweet Created Successfully",success:true,tweet})
+        } catch (error) {
+            console.log(error);
+        }
+     });
     }
-    const user = await userModel.findById(req.user._id).select("-password")
-    const tweet = await tweetModel.create({content,tweetby:req.user._id,userDetails:user,image:path})
-    try {
-        res.status(201).json({message:"Tweet Created Successfully",success:true,tweet})
-    } catch (error) {
-        console.log(error);
+    else if(image==""){
+        if(!content){
+            return res.status(401).json({error:"Please fill the necessary fields",success:false})
+        }
+        const user = await userModel.findById(req.user._id).select("-password")
+        const tweet = await tweetModel.create({content,tweetby:req.user._id,userDetails:user})
+        try {
+            res.status(201).json({message:"Tweet Created Successfully",success:true,tweet})
+        } catch (error) {
+            console.log(error);
+        }
     }
+    
 }
 // Tweet delete controller
 const deleteTweet = async(req,res)=>{

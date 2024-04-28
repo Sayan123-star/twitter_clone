@@ -52,19 +52,24 @@ const Feed = () => {
       toast.error(error);
       dispatch(clearErrors())
     }
-    if (success) {
+    if (success==true) {
       toast.success("User create tweet Successfully")
-
+      // dispatch(getTweets())
     }
     setContent("")
+    setImage("")
   }, [dispatch, error, success, toast])
 
   useEffect(() => {
+    if (success==true) {
+      toast.success("User create tweet Successfully")
+      // dispatch(getTweets())
+    }
     if (refresh === true) {
       dispatch(getTweets())
     }
-  }, [dispatch, refresh])
-  // useEffect(()=>{dispatch(getuser())},[dispatch])
+  }, [dispatch, refresh,success])
+  useEffect(()=>{dispatch(getuser())},[dispatch])
   useEffect(() => {
     dispatch(getTweets())
   }, [dispatch])

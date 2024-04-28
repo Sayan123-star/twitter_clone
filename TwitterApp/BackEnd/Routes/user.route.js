@@ -2,7 +2,8 @@
 const express = require("express");
 const { userRegister, userLogin, getProfile, otherProfile, followUser, unfollowUser, oneProfile, updateUser, userImage } = require("../Controller/user.controller");
 const { isLogged } = require("../middleware/auth");
-const upload = require("../middleware/imageUpload");
+const multer = require("multer");
+const upload = multer({dest:"uploads/"});
 const router = express.Router();
 // The different routes for controlling user related tasks
 router.post("/register",userRegister);
