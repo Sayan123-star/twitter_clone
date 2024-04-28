@@ -87,7 +87,7 @@ function TweetPage({ tweet }) {
             <div className='d-flex p-2'>
 
               {!tweet?.userDetails[0]?.picture ? (<Avatar className='ava' src={require("../Img/profile.jpg")} size="40" round={true} />)
-                : (<Avatar className='ava' src={`${API_URL_POINT}/uploads/${tweet?.userDetails[0]?.picture}`} size="40" round={true} />)
+                : (<Avatar className='ava' src={`${tweet?.userDetails[0]?.picture}`} size="40" round={true} />)
               }
               <div className=' ms-1 w-100'>
                 <div className="d-flex align-items-center mt-3">
